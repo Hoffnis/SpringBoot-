@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
+	
+</head>
+<body>
+
+	<h3>Cadastro Concessionaria</h3><br/>
+	<h5>Cadastrar Cliente</h5>
+	<div class="row">
+	
+	<br/>
+		<div th:each ="m: ${msg}">
+			<span th:text = "${m}"></span>
+		</div>
+	<br/>
+	
+	
+	<form action="salvarpessoa" method= "post" th:object="${pessoaobj}" class="col s12">
+	
+	<div class="row">
+	<div class="input-fiel col s6">
+	<label for="id" class = "active">ID</label>
+	<input name="id" th:field="*{id}" readonly="readonly">
+	</div>
+	<div class="input-fiel col s6">
+	<label for="modelo" class = "active">Modelo</label>
+	<input name="modelo" th:field ="*{modelo}" class = "validate">
+	</div>
+	</div>
+	
+	<div class="row">
+	<div class= "input-fiel col s6">
+	<label for = "cor" class = "active">Cor</label>
+	<input name="cor" th:field ="*{cor}" class = "validate">
+	</div>
+	<div class = "input-fiel col s6">
+	<label for ="placa" class = "active">Placa</label>
+	<input name="placa" th:field ="*{placa}" class = "validate">
+	</div>
+	</div>
+	<input class="waves-effect waves-light btn" type="submit" value="Salvar">
+	
+	</form>
+	</div>
+	<br/>
+	<br/>
+	
+	
+	
+	
+	<form action="pesquisarpessoa" method="post">
+	<label>Pesquisa</label>
+	<input name="nomepesquisa">
+	<input class="waves-effect waves-light btn" type="submit" value="Buscar">
+	<a class="waves-effect waves-light btn" href= "/listapessoas">Lista Pessoas</a>
+	</form>
+	
+	<table>
+		<thead>
+		</thead>
+		<tr th:each ="pessoa : ${pessoas}">
+		<td th:text = "${pessoa.id}"></td>
+		<td><a th:href="@{/proprietario/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text = "${pessoa.modelo}"></span></a></td>
+		<td th:text = "${pessoa.cor}"></td>
+		<td th:text = "${pessoa.placa}"></td>
+		<td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+		<td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
+		</tr>
+		
+	
+	</table>
+	
+	 <script type="text/javascript" src="/materialize/js/materialize.js"></script>
+	 <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
+	
+</head>
+<body>
+
+	<h3>Informações do Veículo</h3><br/>
+	
+	<a class="waves-effect waves-light btn" href="/cadastropessoa"> Voltar</a>
+	<div th:each="p: ${pessoaobj}">
+		<div class="row">
+		
+			<p>ID: <span th:text="${p.id}"></span></p>
+			<p>Modelo: <span th:text="${p.modelo}"></span></p>
+			<p>Cor: <span th:text="${p.cor}"></span></p>
+			<p>Placa: <span th:text="${p.Placa}"></span></p>
+		</div>
+	
+	</div>
+	
+	<h5>Informações do Proprietario</h5>
+	<div class="row">
+		<form th:action="@{/adicionardados/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class = "col s12">
+			<div class= "row">
+				<div classs="input-fiel col s4">
+					<label class= "active" for="numero">Nome</label>
+					<input id="numero" name="numero" class="validate">
+				</div>
+				
+				<div classs="input-fiel col s4">
+					<label class= "active" for="sexo">Sexo</label>
+					<input id="sexo" name="sexo" class="validate">
+				</div>
+					<div classs="input-fiel col s4">
+					<label class= "active" for="cpf">CPF</label>
+					<input id="cpf" name="cpf" class="validate">
+				</div>
+					<div classs="input-fiel col s4">
+					<label class= "active" for="idade">Idade</label>
+					<input id="idade" name="idade" class="validate">
+				</div>
+					<div classs="input-fiel col s4">
+					<label class= "active" for="email">Email</label>
+					<input id="email" name="email" class="validate">
+				</div>
+				
+				<input type="submit" value="Adicionar" class="waves-effect waves-light btn">
+			</div>
+		
+		</form>
+		
+		
+	
+	</div>
+	
+	<table class="striped">
+	<tr th:each="dono : ${proprietario}">
+		<td th:text="${dono.nome}"></td>
+		<td th:text="${dono.sexo}"></td>
+		<td th:text="${dono.cpf}"></td>
+		<td th:text="${dono.idade}"></td>
+		<td th:text="${dono.email}"></td>
+		<td><a th:href="@{/removerproprietario/{idproprietario}(idproprietario=${dono.id})}">Excluir</a></td>
+	
+	</tr>
+	</table>
+	
+	 <script type="text/javascript" src="/materialize/js/materialize.js"></script>
+	 <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+</body>
+</html>
